@@ -33,5 +33,6 @@ app.use(session({
 
 
 require('./services/user-controller')(app);
+require('./services/following-controller')(app);
 
 app.listen(process.env.PORT || 4000);

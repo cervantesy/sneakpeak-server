@@ -16,7 +16,7 @@ const createUser = (user) =>
   userModel.create(user);
 
 const updateUser = (user) =>
-  userModel.updateOne({_id: user._id}, {
+    userModel.updateOne({_id: user._id}, {
     $set: user
   });
 
