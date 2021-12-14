@@ -3,14 +3,25 @@ const friendModel = require('./following-model');
 const findAllFriends = () =>
     friendModel.find();
 
-const createFriend = (friend) =>
-    friendModel.create(friend);
+const createFollowing = (username) =>
+    friendModel.create(username);
 
 const deleteFriend = (id) =>
     friendModel.deleteOne({_id:id});
 
-const findFriendById = (id) =>
-    friendModel.findById(id);
+const findFollowingByUsername = (username) =>
+    friendModel.findById(username);
 
 
-module.exports = { findAllFriends, createFriend, deleteFriend, findFriendById}
+const updateFollowing = (user) =>
+    friendModel.updateOne({username:user.username},
+        {$set: update});
+
+
+
+
+
+
+module.exports = {
+    findAllFriends, createFollowing, deleteFriend,
+    findFollowingByUsername, updateFollowing}

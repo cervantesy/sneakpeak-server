@@ -6,8 +6,8 @@ module.exports = (app) => {
         followingDao.findAllFriends()
             .then(users => res.json(users));
 
-    const findFriendById = (req, res) =>
-        followingDao.findFriendById(req.userId)
+    const findFollowingByUsername = (req, res) =>
+        followingDao.findFollowingByUsername(req.userId)
             .then(user => res.json(user));
 
     const deleteFriend = (req, res) =>
@@ -15,8 +15,26 @@ module.exports = (app) => {
             .then(status => res.send(status));
 
     const createFriend = (req, res) =>
-        followingDao.createTweet(req.body)
+        followingDao.createFriend(req.body)
             .then(tweet => res.json(tweet));
+
+    const updateFollowing = (req, res) =>
+        followingDao.updateFollowing(req.body)
+            .then(status => res.send(status));
+
+    const addFriend= (req,res) =>
+        followingDao.findFollowingByUsername(req.body).then(
+            username => {
+                if(username === {}){
+                    console.log('empty');
+                }
+                else if(username) {
+                    followingDao.updateFollowing(req.body).then(status => res.send(status));
+                } else {
+                    followingDao.createFollowing(req.body).then(status => res.send(status));
+                }
+            }
+        )
 
 
 
@@ -36,8 +54,10 @@ module.exports = (app) => {
     // }
 
 
+    app.post('/api/following', addFriend)
+    app.put('/api/following/:userId', updateFollowing);
     app.post('/api/following', createFriend);
-    app.delete('/api/following/:friendId', deleteFriend);
+    app.delete('/api/following/:userId', deleteFriend);
     app.get('/api/following', findAllFriends);
-    app.get('/api/following/:friendId', findFriendById);
+    app.get('/api/following/:userId', findFollowingByUsername);
 };

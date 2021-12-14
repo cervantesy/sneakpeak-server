@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
 const followingSchema = require('./following-schema');
 const followingModel = mongoose
-    .model('UserModel', followingSchema);
+    .model('FollowingModel', followingSchema);
 module.exports = followingModel;
