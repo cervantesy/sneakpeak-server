@@ -22,7 +22,7 @@ module.exports = (app) => {
 
     const updateWatchlist = (req, res) =>
         watchlistDao.updateWatchlist(req.params.id, req.body)
-            .then(status => res.send(status)).then(console.log(req.body.Poster));
+            .then(status => res.send(status));
 
     const createWatchlist = (req, res) => {
         watchlistDao.createWatchlist(req.body)
