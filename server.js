@@ -1,6 +1,10 @@
 const CONSTANTS = require('./consts');
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+mongoose.connect(CONSTANTS.MONGODB_URL);
+
+
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -12,8 +16,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-const mongoose = require('mongoose');
-mongoose.connect(CONSTANTS.MONGODB_URL);
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));

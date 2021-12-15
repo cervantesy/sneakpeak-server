@@ -19,7 +19,7 @@ module.exports = (app) => {
             .then(tweet => res.json(tweet));
 
     const updateFollowing = (req, res) =>
-        followingDao.updateFollowing(req.body)
+        followingDao.updateFollowing(req.params.id,req.body)
             .then(status => res.send(status));
 
     const addFriend= (req,res) =>
