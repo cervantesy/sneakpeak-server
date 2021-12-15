@@ -1,6 +1,6 @@
 const userDao = require('../users/user-dao');
 const watchlistDao = require('../watchlists/watchlist-dao');
-
+const followingDao = require('../following/following-dao')
 
 module.exports = (app) => {
     const findAllUsers = (req, res) =>
@@ -32,6 +32,7 @@ module.exports = (app) => {
     }
 
     const register = (req, res) => {
+        followingDao.createFollowing(req.body)
         watchlistDao.createWatchlist(req.body)
         userDao.findByUsername(req.body)
             .then(user => {
