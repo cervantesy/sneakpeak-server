@@ -4,13 +4,13 @@ const findAllUsers = () =>
     userModel.find();
 
 const findUserById = (userId) =>
-    userModel.findById(userId);
+    userModel.findOne({_id: userId});
 
 const findByUsernameAndPassword = ({username, password}) =>
     userModel.findOne({username, password});
 
-const findByUsername = (username) =>
-    userModel.findOne({_id: username});
+const findByUsername = ({username}) =>
+    userModel.findOne({username});
 
 const createUser = (user) =>
     userModel.create(user);

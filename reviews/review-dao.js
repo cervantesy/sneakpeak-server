@@ -1,10 +1,10 @@
 const reviewModel = require('./review-model');
 
 const findAllReviews = () =>
-  reviewModel.find();
+    reviewModel.find();
 
 const findReviewByID = (Id) =>
-  reviewModel.findById(Id);
+    reviewModel.findById(Id);
 
 const findReviewByUsername = (user) =>
     reviewModel.find({username: user});
@@ -13,17 +13,17 @@ const findReviewByUsername = (user) =>
 //   reviewModel.findOne({username, password});
 
 const createReview = (review) =>
-  reviewModel.create(review);
+    reviewModel.create(review);
 
 const updateReview = (user) =>
-  reviewModel.updateOne({_id: user._id}, {
-    $set: user
-  });
+    reviewModel.updateOne({_id: user._id}, {
+        $set: user
+    });
 
 const deleteReview = (reviewId) =>
-  reviewModel.deleteOne({_id: reviewId});
+    reviewModel.deleteOne({_id: reviewId});
 
 module.exports = {
-   findAllReviews, findReviewByID, findReviewByUsername,
-  createReview, updateReview, deleteReview
+    findAllReviews, findReviewByID, findReviewByUsername,
+    createReview, updateReview, deleteReview
 };
