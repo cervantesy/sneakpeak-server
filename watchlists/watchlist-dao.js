@@ -1,5 +1,7 @@
 const watchlistModel = require('./watchlist-model');
 
+
+
 const findAllWatchlists = () =>
   watchlistModel.find();
 
@@ -12,15 +14,19 @@ const findWatchlistByID = (userId) =>
 const createWatchlist = (watchlist) =>
   watchlistModel.create(watchlist);
 
-const updateWatchlist = (user) =>
-  watchlistModel.updateOne({_id: user._id}, {
-    $set: user
+const findByUsername = (user) =>
+    watchlistModel.find({username: user});
+
+
+const updateWatchlist = (user, movie) =>
+  watchlistModel.updateOne({username: user}, {
+    $push: {watchlist: {imdbID: movie.imdbID, title: movie.Title, poster: movie.Poster}}
   });
 
 const deleteWatchlist = (watchlistId) =>
   watchlistModel.deleteOne({_id: watchlistId});
 
 module.exports = {
-   findAllWatchlists, findWatchlistByID,
+   findAllWatchlists, findWatchlistByID, findByUsername,
   createWatchlist, updateWatchlist, deleteWatchlist
 };

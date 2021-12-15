@@ -1,5 +1,6 @@
 const watchlistDao = require('../watchlists/watchlist-dao');
 
+
 module.exports = (app) => {
     const findAllWatchlists = (req, res) =>
         watchlistDao.findAllWatchlists()
@@ -9,14 +10,19 @@ module.exports = (app) => {
         watchlistDao.findWatchlistByID(req.params.id)
             .then(watchlist => res.json(watchlist));
 
+    const findWatchlistByUsername = (req, res) =>
+        watchlistDao.findByUsername(req.params.id)
+            .then(watchlist => res.json(watchlist));
+
+
+
     const deleteWatchlist = (req, res) =>
         watchlistDao.deleteWatchlist(req.params.id)
             .then(status => res.send(status));
 
     const updateWatchlist = (req, res) =>
-        watchlistDao.updateWatchlist(req.body)
-            .then(status => res.send(status));
-
+        watchlistDao.updateWatchlist(req.params.id, req.body)
+            .then(status => res.send(status)).then(console.log(req.body.Poster));
 
     const createWatchlist = (req, res) => {
         watchlistDao.createWatchlist(req.body)
@@ -24,9 +30,10 @@ module.exports = (app) => {
     }
 
 
-    app.post('/api/watchlists', createWatchlist);
+
     app.get('/api/watchlists/:id', findWatchlistById);
-    app.put('/api/watchlists/:id', updateWatchlist);
+    app.get('/api/watchlists/username/:id', findWatchlistByUsername);
+    app.put('/api/watchlists/username/:id', updateWatchlist);
     app.delete('/api/watchlists/:id', deleteWatchlist);
     app.get('/api/watchlists', findAllWatchlists);
 };

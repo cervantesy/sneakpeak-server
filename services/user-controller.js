@@ -1,4 +1,5 @@
 const userDao = require('../users/user-dao');
+const watchlistDao = require('../watchlists/watchlist-dao');
 
 
 module.exports = (app) => {
@@ -31,6 +32,7 @@ module.exports = (app) => {
   }
 
   const register = (req, res) => {
+      watchlistDao.createWatchlist(req.body)
     userDao.findByUsername(req.body)
       .then(user => {
         if(user) {
@@ -41,7 +43,7 @@ module.exports = (app) => {
           .then(user => {
             req.session['profile'] = user;
             res.json(user)
-          });
+          })
       })
   }
 
