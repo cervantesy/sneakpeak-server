@@ -7,5 +7,6 @@ const userSchema = mongoose.Schema({
   email: String,
   website: String,
   avatar: String,
+  admin: Boolean,
 }, {collection: 'users'});
 module.exports = userSchema;

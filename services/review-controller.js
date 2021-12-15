@@ -9,13 +9,18 @@ module.exports = (app) => {
         reviewDao.findReviewByID(req.params.id)
             .then(review => res.json(review));
 
+    const findReviewByUsername = (req, res) =>
+        reviewDao.findReviewByUsername(req.params.id)
+            .then(reviews => res.json(reviews));
+
+
     const deleteReview = (req, res) =>
         reviewDao.deleteReview(req.params.id)
-            .then(status => req.send(status));
+            .then(status => res.send(status));
 
     const updateReview = (req, res) =>
         reviewDao.updateReview(req.body)
-            .then(status => req.send(status));
+            .then(status => res.send(status));
 
 
     const createReview = (req, res) => {
@@ -26,6 +31,7 @@ module.exports = (app) => {
 
     app.post('/api/reviews', createReview);
     app.get('/api/reviews/:id', findReviewById);
+    app.get('/api/reviews/username/:id', findReviewByUsername);
     app.put('/api/reviews/:id', updateReview);
     app.delete('/api/reviews/:id', deleteReview);
     app.get('/api/reviews', findAllReviews);

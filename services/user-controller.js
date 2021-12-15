@@ -7,7 +7,7 @@ module.exports = (app) => {
       .then(users => res.json(users));
 
   const findUserById = (req, res) =>
-    userDao.findUserById(req.userId)
+    userDao.findUserById(req.params.id)
       .then(user => res.json(user));
 
   const deleteUser = (req, res) =>

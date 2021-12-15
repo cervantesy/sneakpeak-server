@@ -3,8 +3,11 @@ const reviewModel = require('./review-model');
 const findAllReviews = () =>
   reviewModel.find();
 
-const findReviewByID = (userId) =>
-  reviewModel.findById(userId);
+const findReviewByID = (Id) =>
+  reviewModel.findById(Id);
+
+const findReviewByUsername = (user) =>
+    reviewModel.find({username: user});
 
 // const findByUsernameAndPassword = ({username, password}) =>
 //   reviewModel.findOne({username, password});
@@ -21,6 +24,6 @@ const deleteReview = (reviewId) =>
   reviewModel.deleteOne({_id: reviewId});
 
 module.exports = {
-   findAllReviews, findReviewByID,
+   findAllReviews, findReviewByID, findReviewByUsername,
   createReview, updateReview, deleteReview
 };

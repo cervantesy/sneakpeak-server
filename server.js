@@ -26,6 +26,7 @@ app.use(session({
 }));
 
 
+require('./services/watchlist-controller')(app);
 require('./services/user-controller')(app);
 require('./services/following-controller')(app);
 require('./services/review-controller')(app);
